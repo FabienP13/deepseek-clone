@@ -20,14 +20,17 @@ export async function POST(req) {
     const body = JSON.stringify(payload)
     const { data, type } = wh.verify(body, svixHeaders)
 
+    console.log(data);
+    
     //Prepare the user data to be saved in the database
     const userData = {
         _id: data._id,
-        email: data.email_addresses[0].email_address,
         name: `${data.first_name} ${data.last_name}`,
+        email: data.email_addresses[0].email_address,
         image: data.image_url
     }
-
+    console.log(userData);
+    return null
     await connectDB();
 
     switch (type) {
